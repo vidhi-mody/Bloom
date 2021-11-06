@@ -68,6 +68,11 @@ function isValidUser(req,res,next){
   }
 }
 
+router.get('/bot',isValidUser, async function(req,res,next){
+  let user = await User.findOne({_id:req.user._id})
+  res.render('botto',{user})
+})
+
 
 
 module.exports = router;
