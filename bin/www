@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+
+var app = require('../app');
+var debug = require('debug')('fitandfab:server');
+var http = require('http');
+const socketio = require('socket.io');
+const Filter=require('bad-words')
+const{generateMessage}= require('./utils/messages');
+const {addUser,getUser, removeUser, getUsersInRoom, getMeet, addMeet} = require('./utils/users')
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+var server = http.createServer(app);
+const io = socketio(server)
+io.on('connection',(socket)=>{
+  console.log('Connected')
+
+
+  socket.on('join',({username,room,userid, meet},callback)=>{
+    const {error,user}=addUser({id:socket.id,username,room, userid})
+    addMeet({room,meet})
+    if(error){
+      return callback(error)
+    }
+      socket.join(user.room)
+    const meet1 = getMeet(room)? getMeet(room).meet : 'will be sent by the doctor soon'
+    console.log(meet1)
+     // There are ${number} users online in this session. If you are the only one here, please wait for other users to show up.
+    socket.emit('message',
+      generateMessage(`Welcome to your appointment room! \n Your meeting link is ${meet1}`,'Medi.co')
+    )
+    socket.broadcast.to(user.room).emit('message',generateMessage(`${username} has joined`,'Medi.co','#'))
+    io.to(user.room).emit('roomdata',{
+      room:user.room,
+    })
+    callback()
+  })
+
+
+  socket.on('send',(msg,callback)=>{
+    const filter = new Filter ()
+    const user=getUser(socket.id)
+    console.log(msg)
+    if (filter.isProfane(msg)){
+      return callback ('Profanity is not allowed')
+    }
+    io.to(user.room).emit('message',generateMessage(msg,user.username,user.userid))
+    callback();
+  })
+  socket.on('disconnect',()=>{
+    const user=removeUser(socket.id)
+    if(user){
+      io.to(user.room).emit('message',generateMessage(`${user.username} has left`,'Medi.co','#'))
+      io.to(user.room).emit('roomdata',{
+        room:user.room,
+        users:getUsersInRoom(user.room)
+      })
+    }
+  })
+})
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+  
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
