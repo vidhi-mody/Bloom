@@ -18,7 +18,7 @@
                 <h4 class="card-title"><%- recipes[i].title %></h4>
                
                 <span>
-                <form action="/users/list" method="POST">
+                <form action="/recipe/list" method="POST">
                   <a href="/recipe/single/<%- recipes[i].id %>" class="btn btn-primary">View Recipe</a>
                   <input type="hidden" name="title" value="<%- recipes[i].title %>">
                   <input type="hidden" name="image" value="<%- recipes[i].image %>">
