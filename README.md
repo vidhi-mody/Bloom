@@ -44,22 +44,20 @@ Making healthy lifestyle changes is easier said than done. Even when we're stron
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-### Features
+### How is this tool helpful?
 
-#### 1. The Tools for Your Goals
+- Goals: Your first step towards a healthy lifestyle is setting two goals. The first goal is your target number. Once you've set this goal, next is to figure out your deadline. Be realistic about them.
+- Exercise Plan: Exercise at a local gym, go for a jog or try those workout videos at home! However you choose to exercise, a great way to help you stay focused on your goal is to use a fitness tracker.
+- Eating Right: In addition to your new exercise routine, you will also be changing your diet. But don't think of it as dieting, you will simply be forming new and healthier eating habits.
 
-Take control of your goals. Track calories, break down ingredients, and log activities.
+### Key Features
 
-#### 2. Learn. Track. Improve.
-
-Keeping a food diary helps you understand your habits and increases your likelihood of hitting your goals.
-
-#### 3. Logging Simplified
-
-Save your favourite recipes and use Quick Tools for fast and easy food tracking.
-#### 4. Stay Motivated
-
-Join the World’s Largest Fitness Community for advice, tips, and support 24/7.
+- The Healthy Recipe Guide: A list of curated recipes based on your ingredients, calorie intake, etc
+- Lifestyle Tracker: Track your steps, calories, etc with the lifestyle tracker
+- The Healthy Bot: Ask the bot anything health related and it will answer your questions
+- Gym and Hospital Locator: Get a list of the nearest hospitals and gyms based on your location
+- Retrospective Tracker: Analyse your mood and let it all out in your daily journal
+- The Community Forum: Make Healthy Changes and share tips, achievements and advice!
 
 ### Built With
 
@@ -78,6 +76,14 @@ This project would never have been possible without these wonderful frameworks a
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+
+### File Structure
+
+| Directory                                                                                         | Content                      |
+| --------------------------------------------------------------------------------------------------| ---------------------------- |
+| [models](https://github.com/vidhi-mody/Bloom/tree/master/models) | contains the database models |
+| [routes](https://github.com/vidhi-mody/Bloom/tree/master/routes)   | contains routing modules         |
+| [views](https://github.com/vidhi-mody/Bloom/tree/master/views)         | contains all frontend components |
 
 ### Prerequisites
 
