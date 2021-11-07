@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <%- include('partials/head') %>
+
+<body class="">
+  <div class="wrapper">
+    <%- include('partials/sidebar') %>
+    <div class="main-panel">
+        <%- include('partials/navbar') %>
+      <div class="content">
+        <iframe
+            allow="microphone;"
+            width="100%"
+            height="650px"
+            src="https://console.dialogflow.com/api-client/demo/embedded/6ca4d5fe-66c2-452b-bd1f-50a1f510b93f">
+        </iframe>
+      </div>
+      <%- include('partials/footer') %>
+    </div>
+  </div>
+ 
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/black-dashboard.min.js?v=1.0.0"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="../assets/demo/demo.js"></script>
+</body>
+
+</html>
