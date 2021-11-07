@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var recipeRouter = require('./routes/recipes');
 var walkRouter = require('./routes/walk');
-
+let findRouter = require('./routes/find');
 const mongoose = require('mongoose')
 var session = require('express-session');
 const passport = require('passport');
@@ -55,7 +55,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/recipe', recipeRouter);
 app.use('/walk', walkRouter);
-
+app.use('/find',findRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
